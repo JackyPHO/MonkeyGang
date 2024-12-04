@@ -12,9 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private float xRotation = 0f; // Vertical rotation for the camera
     public Transform playerCamera; // Drag the Main Camera here in the Inspector
 
+    private bool isSpeedBoosted = false; // Flag to track if speed boost is active
+    private float originalSpeed; // Store the original speed
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        originalSpeed = speed; // Save the original speed value
 
         // Lock the cursor for mouse control
         Cursor.lockState = CursorLockMode.Locked;
@@ -54,5 +58,25 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if the player is grounded using a raycast
         return Physics.Raycast(transform.position, Vector3.down, 1.1f);
+    }
+
+    // Method to apply the speed boost
+    public void ApplySpeedBoost(float boostAmount, float duration)
+    {
+        if (!isSpeedBoosted)
+        {
+            StartCoroutine(SpeedBoostCoroutine(boostAmount, duration));
+        }
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float boostAmount, float duration)
+    {
+        isSpeedBoosted = true;
+        speed += boostAmount; // Increase speed
+        Debug.Log($"Speed boosted to {speed} for {duration} seconds.");
+        yield return new WaitForSeconds(duration);
+        speed = originalSpeed; // Reset to original speed
+        isSpeedBoosted = false;
+        Debug.Log("Speed boost ended.");
     }
 }

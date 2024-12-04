@@ -9,10 +9,10 @@ public class SpeedOrb : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerStats playerStats = other.GetComponent<PlayerStats>();
-            if (playerStats != null)
+            PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
+            if (playerMovement != null)
             {
-                playerStats.IncreaseSpeed(speedBoostAmount, duration);
+                playerMovement.ApplySpeedBoost(speedBoostAmount, duration);
                 Debug.Log($"Speed increased by {speedBoostAmount} for {duration} seconds.");
             }
 

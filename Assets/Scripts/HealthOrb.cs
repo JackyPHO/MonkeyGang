@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class HealthOrb : MonoBehaviour
 {
-    public int healthBoostAmount = 10; // Amount of health to increase
+    public int healthIncreaseAmount = 25; // Amount of health to restore
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerStats playerStats = other.GetComponent<PlayerStats>();
-            if (playerStats != null)
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                playerStats.IncreaseHealth(healthBoostAmount);
-                Debug.Log($"Health increased by {healthBoostAmount}");
+                playerHealth.IncreaseHealth(healthIncreaseAmount);
+                Debug.Log($"Health orb collected! Restored {healthIncreaseAmount} health.");
             }
 
             Destroy(gameObject); // Remove the orb after collection

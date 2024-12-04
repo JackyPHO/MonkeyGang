@@ -56,4 +56,5 @@ public class OrbSpawner : MonoBehaviour
 
             Instantiate(speedOrbPrefab, spawnPosition, Quaternion.identity);
         }
+    }
 }
