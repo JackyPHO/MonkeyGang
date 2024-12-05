@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
+
 {
     public CanvasGroup SettingsPanel;
     public CanvasGroup CreditsPanel;
@@ -31,6 +32,11 @@ public class MainMenuController : MonoBehaviour
         SettingsPanel.blocksRaycasts = false;
         CreditsPanel.alpha = 0;
         CreditsPanel.blocksRaycasts = false;
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
