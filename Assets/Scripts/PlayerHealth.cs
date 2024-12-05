@@ -16,9 +16,9 @@ public class PlayerHealth : MonoBehaviour
         {
             hearts = 3;
         }
-        heart3.SetActive(false);
-        heart2.SetActive(false);
-        heart1.SetActive(false);
+        heart3.SetActive(true);
+        heart2.SetActive(true);
+        heart1.SetActive(true);
     }
     private void Update()
     {
@@ -28,21 +28,11 @@ public class PlayerHealth : MonoBehaviour
         }
         if (hearts == 1)
         {
-            heart3.SetActive(false);
             heart2.SetActive(false);
-            heart1.SetActive(true);
         }
         if (hearts == 2)
         {
             heart3.SetActive(false);
-            heart2.SetActive(true);
-            heart1.SetActive(true);
-        }
-        if (hearts == 3)
-        {
-            heart3.SetActive(true);
-            heart2.SetActive(true);
-            heart1.SetActive(true);
         }
     }
     private void Die()
