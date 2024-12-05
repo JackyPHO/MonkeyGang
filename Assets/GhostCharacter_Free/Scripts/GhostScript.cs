@@ -24,8 +24,10 @@ namespace Sample
         [SerializeField] private float AttackRange = 2f;
         [SerializeField] private float ChaseStopRange = 15f; // Distance beyond which the enemy stops chasing the player
         [SerializeField] private float PatrolWaitTime = 2f;  // Time to wait at each patrol point
+        [SerializeField] private float seconds = 5f; //Cooldown after attacking player
         private bool IsChasingPlayer = false;
         private bool IsWaiting = false;
+        private bool canAttack = true;
 
         void Start()
         {
@@ -60,7 +62,7 @@ namespace Sample
             {
                 StartChasingPlayer();
             }
-            else if (distanceToPlayer <= AttackRange)
+            else if (distanceToPlayer <= AttackRange && canAttack)
             {
                 AttackPlayer();
             }
@@ -129,7 +131,14 @@ namespace Sample
         {
             Agent.ResetPath(); // Stop moving
             Anim.CrossFade(AttackState, 0.1f);
-            Debug.Log("Enemy is attacking the player!");
+            PlayerHealth.hearts--;
+            StartCoroutine(WaitCooldown(seconds));
+        }
+        private IEnumerator WaitCooldown(float time)
+        {
+            canAttack = false;
+            yield return new WaitForSeconds(time);
+            canAttack = true;
         }
     }
 }
